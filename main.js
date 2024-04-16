@@ -14,21 +14,22 @@ links.forEach((e) => {
   e.addEventListener("click", toggleMenu);
 });
 
-// window.addEventListener("scroll", function () {
-//   // Obtendo a posição atual de rolagem
-//   const scrollPosition = window.scrollY;
+const servicos = document.querySelector("#servicos");
+const projetos = document.querySelector("#projetos");
+// console.log(elemento);
 
-//   // Obtendo o elemento do cabeçalho
-//   const header = document.querySelector("header");
+function getYPosition(elemento) {
+  var posicaoY = 0;
+  while (elemento) {
+    posicaoY += elemento.offsetTop - elemento.scrollTop + elemento.clientTop;
+    elemento = elemento.offsetParent;
+  }
+  return posicaoY;
+}
+const servicosPositionY = getYPosition(servicos);
+const projetosPositionY = getYPosition(projetos);
 
-//   // Definindo a cor do cabeçalho com base na posição de rolagem
-//   if (scrollPosition > 0) {
-//     header.style.backgroundColor = "white";
-//   } else {
-//     header.style.backgroundColor = "#001F3E";
-//     logo.setAttribute("src", "./assets/conecta+blue.svg");
-//   }
-// });
+console.log(servicosPositionY);
 
 const header = document.querySelector(".header");
 window.addEventListener("scroll", () => {
@@ -36,30 +37,16 @@ window.addEventListener("scroll", () => {
   links.forEach((link) => {
     link.style.color = "white";
   });
-  const scrollY = window.scrollY;
+  let scrollY = window.scrollY;
   console.log(scrollY);
 
-  if (scrollY > 10) {
-    console.log("teste");
-  }
   if (scrollY === 0) {
     header.style.backgroundColor = "transparent";
   }
-  if (scrollY > 1374) {
+  if (scrollY > servicosPositionY) {
     header.style.backgroundColor = "white";
     links.forEach((link) => {
       link.style.color = "#001F3E";
     });
   }
 });
-
-// const header = document.querySelector("header");
-
-// header.style.backgroundColor = "white";
-
-// window.addEventListener("scroll", () => {
-//   console.log("teste");
-//   let scrollY = window.scrollY;
-//   console.log(scrollY);
-// });
-// console.log(header);
